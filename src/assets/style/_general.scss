@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+body{
+    background-color: $main-color;
+}
+
+.page-box{
+    min-height: 50px;
+    width: 80%;
+    padding: 20px 10%;
+    margin: 0 auto 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 0 10px $box-shadow-color;
+}

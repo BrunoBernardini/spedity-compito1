@@ -1,28 +1,50 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <HeaderComp
+            @changeView="setView"/>
+        <FormComp
+            v-if="activeMenu === 1"
+            @receiveShippingData="setShippingData"/>
+        <RecapComp
+            v-if="Object.keys(currentShippingData).length > 0 && activeMenu === 2"
+            :shippingDataReceived="currentShippingData"/>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HeaderComp from './components/HeaderComp.vue';
+import FormComp from './components/FormComp.vue';
+import RecapComp from './components/RecapComp.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name: 'App',
+    components: {
+        HeaderComp,
+        FormComp,
+        RecapComp
+    },
+    data(){
+        return{
+            currentShippingData: {},
+            activeMenu: 1,
+        }
+    },
+    methods: {
+        setShippingData(shippingData){
+            this.activeMenu = 2;
+            this.currentShippingData = shippingData;
+        },
+        setView(idView){
+            this.activeMenu = idView;
+        }
+    }
 }
 </script>
 
 <style lang="scss">
+@import "./assets/style/vars";
+@import "./assets/style/general";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    min-height: 100vh;
 }
 </style>
